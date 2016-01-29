@@ -14,7 +14,7 @@ class Metrics {
   }
 
   push(name, increment) {
-    var metric = this._registry.register(name, MetricType.COUNTER);
+    var metric = this._registry.getOrRegisterMetric(name, MetricType.COUNTER);
     metric.update(increment);
   }
 
