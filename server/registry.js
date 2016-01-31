@@ -1,5 +1,5 @@
 /* exported MetricsRegistry */
-/* global MetricType Counter */
+/* global MetricType Counter MetricsCollection */
 
 class MetricsRegistry {
   constructor() {
@@ -28,12 +28,16 @@ class MetricsRegistry {
         break;
       default:
         // TODO log this?
-        break;
+        return null;
     }
 
-    // Make a new DB entry for this metric.
+    // Save this in the DB.
+    metric.create();
 
     // Save this metric in the cache.
+    if (this._metricsCache.length < this.cacheSize) {
+      this._metricsCache[type].push(metric);
+    }
 
     return metric;
   }
@@ -46,7 +50,14 @@ class MetricsRegistry {
 
     // Get from db next if cache was no luck.
     if (!metric) {
-      // TODO get from db.
+      metric = MetricsCollection.findOne({ name: name });
+      switch (type) {
+        case MetricType.COUNTER:
+          metric = Counter.fromDatabaseEntry(metric);
+          break;
+        default:
+          break;
+      }
     }
 
     return metric;
