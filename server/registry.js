@@ -1,16 +1,16 @@
 /* exported MetricsRegistry */
-/* global MetricType */
+/* global MetricType Counter */
 
 class MetricsRegistry {
   constructor() {
     // Initialize.
-    this._metricsCache = MetricsRegistry._initCache();
+    this._metricsCache = this._initCache();
+    this.cacheSize = 100; // TODO make this configurable
   }
 
-  static _initCache() {
-    // TODO maybe fill this up with some metrics initially? or just let it fill naturally...
-    var cache = {};
-    for (var type in MetricType) {
+  _initCache() {
+    let cache = [];
+    for (let type in MetricType) {
       if (!MetricType.hasOwnProperty(type)) {
         continue;
       }
@@ -21,26 +21,40 @@ class MetricsRegistry {
   }
 
   registerMetric(name, type) {
-    // Make new entry for collection.
-    // Store inside cache.
+    let metric = null;
+    switch (type) {
+      case MetricType.COUNTER:
+        metric = new Counter(name);
+        break;
+      default:
+        // TODO log this?
+        break;
+    }
+
+    // Make a new DB entry for this metric.
+
+    // Save this metric in the cache.
+
+    return metric;
   }
 
   getMetric(name, type) {
     // Get from cache first.
-    var metrics = this.metricsCache[type];
-    for (var metric of metrics) {
-      if (metric.name === name) {
-        return metric;
-      }
-    }
+    let metric = this._metricsCache[type].find(
+      x => x.name === name
+    );
 
     // Get from db next if cache was no luck.
-    // TODO
+    if (!metric) {
+      // TODO get from db.
+    }
+
+    return metric;
   }
 
   getOrRegisterMetric(name, type) {
     var metric = this.getMetric(name, type);
-    if (metric !== null) {
+    if (metric) {
       return metric;
     }
 

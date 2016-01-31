@@ -2,9 +2,7 @@
 
 // where should I put this?
 const MetricType = {
-  COUNTER: 0,
-  GUAGE: 1,
-  TIMER: 2
+  COUNTER: Symbol()
 };
 
 class Metrics {
