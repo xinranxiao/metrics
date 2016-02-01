@@ -1,6 +1,3 @@
-/* exported MetricsRegistry */
-/* global MetricType Counter MetricsCollection */
-
 MetricsRegistry = class MetricsRegistry {
   constructor() {
     // Initialize.

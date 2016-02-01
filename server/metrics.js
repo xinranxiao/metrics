@@ -1,8 +1,6 @@
-/* global MetricsRegistry */
-
 // where should I put this?
 MetricType = {
-  COUNTER: Symbol()
+  COUNTER: 0
 };
 
 class MetricsWrapper {
@@ -17,16 +15,6 @@ class MetricsWrapper {
       metric.update(increment);
     }
   }
-
-  /*
-  metrics.push("hello", 5);
-  metrics.guage("howmanyvars", 5 (seconds), function() {
-    return var.len;
-  }
-  var timer = metrics.timer("hello");
-  timer.start();
-  timer.end();
-   */
 }
 
 Metrics = new MetricsWrapper();

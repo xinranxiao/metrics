@@ -1,6 +1,3 @@
-/* exported Counter */
-/* global MetricType MetricsCollection */
-
 Counter = class Counter {
   constructor(name) {
     this.name = name;
@@ -49,10 +46,16 @@ Counter = class Counter {
       return null;
     }
 
+    if (rawMetric.type !== MetricType.COUNTER.toString()) {
+      console.log('metric type mismatch: ' + rawMetric.type +
+        ' found, expected: ' + MetricType.COUNTER);
+      return null;
+    }
+
     let counter = new Counter(rawMetric.name);
     counter.id = rawMetric.id;
     counter.entries = rawMetric.entries;
 
     return counter;
   }
-}
+};

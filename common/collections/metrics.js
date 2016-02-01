@@ -1,5 +1,3 @@
-/* global SimpleSchema */
-
 MetricsCollection = new Mongo.Collection('metrics');
 
 // TODO this kinda only works for counters, will probably have to change strategy for other types.
