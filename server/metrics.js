@@ -1,11 +1,11 @@
 /* global MetricsRegistry */
 
 // where should I put this?
-const MetricType = {
+MetricType = {
   COUNTER: Symbol()
 };
 
-class Metrics {
+class MetricsWrapper {
   constructor(options) {
     this._options = options;
     this._registry = new MetricsRegistry();
@@ -29,4 +29,4 @@ class Metrics {
    */
 }
 
-var metrics = new Metrics();
+Metrics = new MetricsWrapper();

@@ -1,7 +1,7 @@
 /* exported MetricsRegistry */
 /* global MetricType Counter MetricsCollection */
 
-class MetricsRegistry {
+MetricsRegistry = class MetricsRegistry {
   constructor() {
     // Initialize.
     this._metricsCache = this._initCache();

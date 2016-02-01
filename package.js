@@ -13,6 +13,13 @@ Package.onUse(function(api) {
     'ecmascript'
   ]);
   api.addFiles([
+    'server/counter.js',
+    'server/registry.js',
     'server/metrics.js'
   ], 'server');
+  api.addFiles([
+    'common/collections/metrics.js'
+  ], ['client', 'server']);
+
+  api.export('Metrics', 'server');
 });

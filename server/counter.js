@@ -1,7 +1,7 @@
 /* exported Counter */
 /* global MetricType MetricsCollection */
 
-class Counter {
+Counter = class Counter {
   constructor(name) {
     this.name = name;
     this.entries = []; // TODO when getting this from db, we should limit how many to return.
@@ -11,10 +11,10 @@ class Counter {
     if (!start && !end) {
       // Return everything.
       return this.entries;
-    } else {
-      // TODO only return subset.
-      return null;
     }
+
+    // TODO only return subset.
+    return null;
   }
 
   create() {
@@ -25,7 +25,7 @@ class Counter {
 
     this.id = MetricsCollection.insert({
       name: this.name,
-      type: MetricType.COUNTER
+      type: MetricType.COUNTER.toString()
     });
   }
 
